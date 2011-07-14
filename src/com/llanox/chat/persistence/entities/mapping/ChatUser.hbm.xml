@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 26, 2010 6:12:52 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class catalog="cmi_chat"
+  name="com.cmi.chat.persistence.entities.ChatUser" table="chat_users">
+  <id name="id" type="long">
+   <column name="id"/>
+   <generator class="increment"/>
+  </id>
+  <property generated="never" lazy="false" name="nickName" type="string">
+   <column length="45" name="nick_name" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="emailUser" unique="true" type="string">
+   <column length="100" name="email_user" not-null="true"/>
+  </property>
+  <property name="role" type="string">
+   <column length="20" name="role"/>
+  </property>
+ </class>
+</hibernate-mapping>

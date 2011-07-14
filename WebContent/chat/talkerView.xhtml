@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+    xmlns:ice-cc="http://www.icesoft.com/icefaces-composite-comps">
+	
+	<head>
+	
+	    <ice:outputStyle href="../xmlhttp/css/rime/rime.css" id="outputStyle" />    
+	</head>
+	<body>
+        
+           <div id="chat" align="center">
+              
+                      
+             <ice:form  id="formChat" partialSubmit="true" >
+             
+               <ice:panelGrid id="fr1" rendered="#{!talkerChat.chatBean.enableChatting}" >
+                
+               
+               <ice:panelGrid id="pnlRegister" columns="4" >                          
+               <ice:commandButton id="btnRegister"	actionListener="#{talkerChat.register}" value="Ingresar al chat del juego" />           
+               </ice:panelGrid>
+               
+               <ice:panelGrid id="pgMsgsGrls"    columns="1" >
+               <ice:outputText id="optMsgsGrls" value="#{talkerChat.message}" style="background-color: #F8CA00; width:auto; align:center" />
+               </ice:panelGrid>
+               
+               </ice:panelGrid>
+             
+             
+             
+                                 
+              
+               <ice:panelGrid id="pnlMsgs"   rendered="#{talkerChat.chatBean.enableChatting}"   columns="1" >
+                
+               <ice:panelGroup id="gpChat"  style="background-color: #FBFFE3; width:auto; align:center"  >
+               
+               
+               <ice:panelGrid id="pgTitle"  style="background-color: #83A300; width:auto; align:center"  columns="2" >
+               <ice:outputText id="optTitle" value="Chat #{talkerChat.chatBean.chatRoom}"/>
+               </ice:panelGrid>
+               
+               <ice:panelGrid id="pgMsgs"    columns="2" >
+               <ice:outputText id="optMsgs" value="#{talkerChat.chatBean.notification}" style="background-color: #F8CA00; width:auto; align:center" />
+               </ice:panelGrid>
+               
+               <ice:panelGrid id="pgSendMsg" columns="3" >
+                <ice:inputText  maxlength="50" disabled="#{!talkerChat.chatBean.enableChatting}" actionListener="#{talkerChat.chatBean.sendMessage}"  id="iptMsgs" style="width:200px;" partialSubmit="true" value="#{talkerChat.chatBean.textMessage}"/>
+                <ice:commandButton    disabled="#{!talkerChat.chatBean.enableChatting}"	actionListener="#{talkerChat.chatBean.sendMessage}"  value="Enviar" />
+                 <ice:commandButton	disabled="#{!talkerChat.chatBean.enableChatting}" actionListener="#{talkerChat.chatBean.closeChat}" value="Cerrar Chat" >
+             
+                 </ice:commandButton>
+               </ice:panelGrid>
+                       
+                             
+               <ice:panelSeries  id="psChatMsgs" style="background-color: AliceBlue; height: 200px; width: 600px;overflow:auto;"  var="chatMsg" value="#{talkerChat.chatBean.chatMessages}"  >
+               
+                <ice:panelGrid id="pgMsgChat" columns="3" >
+                <ice:outputLabel style="text-align:center "	value="#{chatMsg.time}">
+								<f:convertDateTime type="date" pattern="HH:mm:ss" timeZone="America/Bogota" />
+			    </ice:outputLabel>
+                <ice:outputLabel  id="optlbUser"  value="- #{chatMsg.sender.nickName}:" > </ice:outputLabel>
+                <ice:outputText id="optTextMessage" value="#{chatMsg.message}"/>                
+                </ice:panelGrid>
+                
+               
+               </ice:panelSeries>
+                                         
+             
+               
+              
+              </ice:panelGroup>
+              
+              </ice:panelGrid>
+              
+          
+              
+             </ice:form>
+             
+           
+         </div>	
+       
+
+	</body>
+ </html>
+ 

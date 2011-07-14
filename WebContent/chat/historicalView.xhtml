@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+    xmlns:ice-cc="http://www.icesoft.com/icefaces-composite-comps">
+	
+	<head>
+		<ui:insert name="title">Historial de Chats</ui:insert>
+	    <ice:outputStyle href="../xmlhttp/css/rime/rime.css" id="outputStyle" />
+	</head>
+	<body>
+         <div id="content">
+             <ice:form>
+             
+             <ice:panelGrid  id="pnlSearch" columns="5" >
+               <ice:outputLabel id="otpLabelStartDate" style="text-align:center"	value="Desde:"/>
+              <ice:selectInputDate id="sidStartDate" renderAsPopup="true"	renderMonthAsDropdown="true" renderYearAsDropdown="true" value="#{chatHistory.startDate}" >
+						<f:convertDateTime type="date" pattern="dd-MMM-yyyy" timeZone="America/Bogota" />
+			  </ice:selectInputDate>
+             
+               <ice:outputLabel id="otpEndDate" style="text-align:center "	value="Antes del:"/>
+               
+              <ice:selectInputDate id="sidEndDate" renderAsPopup="true"	renderMonthAsDropdown="true" renderYearAsDropdown="true"  value="#{chatHistory.endDate}" >
+						<f:convertDateTime type="date" pattern="dd-MMM-yyyy" timeZone="America/Bogota" />
+			  </ice:selectInputDate>
+               <ice:commandButton id="btnSearch"	actionListener="#{chatHistory.searchChats}" value="Buscar" />
+              </ice:panelGrid>   
+             
+             
+<!--     		  <ice:panelSeries style="float:left" id="psAgentChats" var="chatBean" value="#{chatHistory.chatBeans}"  >-->
+<!--                       -->
+<!--                <ice:panelGroup id="chatBox"  style="background-color: #FBFFE3; width:auto; align:center" >-->
+<!--                -->
+<!--               <ice:panelGrid id="pgTitle"  style="background-color: #83A300; width:auto; align:center"  columns="2" >-->
+<!--               <ice:outputText id="optTitle" value="Chat #{chatBean.chat.id}"/>-->
+<!--               </ice:panelGrid>-->
+<!--               -->
+<!--               <ice:panelGrid id="pgMsgs"    columns="2" >-->
+<!--               <ice:outputText id="optMsgs" value="#{chatBean.notification}" style="background-color: #F8CA00; width:auto; align:center" />-->
+<!--               </ice:panelGrid>-->
+<!--               -->
+<!--               -->
+<!--                             -->
+<!--               <ice:panelSeries id="psChatMsgs"  style="background-color: AliceBlue; height: 200px; width: 600px; overflow: auto;"  var="chatMsg" value="#{chatBean.chat.chatMessages}"  >-->
+<!--               -->
+<!--                <ice:panelGrid id="pgMsgChat" columns="3" >-->
+<!--                <ice:outputLabel style="text-align:left "	value="#{chatMsg.time}">-->
+<!--								<f:convertDateTime type="date" pattern="HH:mm:ss" timeZone="America/Bogota" />-->
+<!--			    </ice:outputLabel>-->
+<!--                <ice:outputLabel  id="optlbUser"  value="- #{chatMsg.sender.nickName}:" > </ice:outputLabel>-->
+<!--                <ice:outputText id="optTextMessage" value="#{chatMsg.message}"/>                -->
+<!--                </ice:panelGrid>-->
+<!--                -->
+<!--               -->
+<!--               </ice:panelSeries>-->
+<!--                                         -->
+<!--                <ice:panelGrid id="pgSendMsg" columns="3" >-->
+<!--                <ice:inputText maxlength="50" disabled="#{!chatBean.enableChatting}" actionListener="#{chatBean.sendMessage}"  id="iptMsgs" style="width:200px;" partialSubmit="true" value="#{chatBean.textMessage}"/>-->
+<!--                <ice:commandButton disabled="#{!chatBean.enableChatting}"	actionListener="#{chatBean.sendMessage}" value="Enviar" />-->
+<!--                 <ice:commandButton	disabled="#{!chatBean.enableChatting}" actionListener="#{chatBean.closeChat}" value="Cerrar Chat" >-->
+<!--                 <f:param name="patient" value="#{chatBean.receiver.userSession}"/>-->
+<!--                 </ice:commandButton>-->
+<!--               </ice:panelGrid>-->
+<!--               -->
+<!--              </ice:panelGroup>-->
+<!--              -->
+<!--              </ice:panelSeries>-->
+          
+                    
+               <ice:dataPaginator for="tableChats"  keyboardNavigationEnabled="true" paginator="true" id="dataPaginator" paginatorMaxPages="2"
+                 rowsCountVar="rowsCount"
+                 displayedRowsCountVar="displayedRowsCountVar"
+                 firstRowIndexVar="firstRowIndex"
+                 lastRowIndexVar="lastRowIndex"
+                 pageCountVar="pageCount"
+                 pageIndexVar="pageIndex"
+               
+               >
+               
+               <ice:outputFormat value="Se han encontrado {0} conversaciones de chat . Pagina {4} / {5}" styleClass="standard" >
+                        <f:param value="#{rowsCount}" />
+                        <f:param value="#{displayedRowsCountVar}" />
+                        <f:param value="#{firstRowIndex}" />
+                        <f:param value="#{lastRowIndex}" />
+                        <f:param value="#{pageIndex}" />
+                        <f:param value="#{pageCount}" />
+                </ice:outputFormat>
+               
+                                        <f:facet name="first">
+                                            <ice:graphicImage id="graphicImage7" url="../xmlhttp/css/rime/css-images/arrow-first.gif"/>
+                                        </f:facet>
+                                        <f:facet name="last">
+                                            <ice:graphicImage id="graphicImage8" url="../xmlhttp/css/rime/css-images/arrow-last.gif"/>
+                                        </f:facet>
+                                        <f:facet name="previous">
+                                            <ice:graphicImage id="graphicImage9" url="../xmlhttp/css/rime/css-images/arrow-previous.gif"/>
+                                        </f:facet>
+                                        <f:facet name="next">
+                                            <ice:graphicImage id="graphicImage10" url="../xmlhttp/css/rime/css-images/arrow-next.gif"/>
+                                        </f:facet>
+                                        <f:facet name="fastforward">
+                                            <ice:graphicImage id="graphicImage11" url="../xmlhttp/css/rime/css-images/arrow-ff.gif"/>
+                                        </f:facet>
+                                        <f:facet name="fastrewind">
+                                            <ice:graphicImage id="graphicImage12" url="../xmlhttp/css/rime/css-images/arrow-fr.gif"/>
+                                        </f:facet>
+             </ice:dataPaginator>
+          
+              
+              <ice:dataTable binding="#{chatHistory.chatsUIData}" headerClass="icelist-header" id="tableChats" rowClasses="rowClass1,rowClass2" rows="2" style="cursor:pointer" value="#{chatHistory.chatBeans}" var="chatBean" width="50%">
+              <ice:column id="chatBox">
+                   <ice:panelGroup id="chatBox"  style="background-color: #FBFFE3; width:auto; align:center" >
+                
+               <ice:panelGrid id="pgTitle"  style="background-color: #83A300; width:auto; align:center"  columns="2" >
+               <ice:outputText id="optTitle" value="Chat #{chatBean.chat.id}"/>
+               </ice:panelGrid>
+               
+               <ice:panelGrid id="pgMsgs"    columns="2" >
+               <ice:outputText id="optMsgs" value="#{chatBean.notification}" style="background-color: #F8CA00; width:auto; align:center" />
+               </ice:panelGrid>
+               
+               
+                             
+               <ice:panelSeries id="psChatMsgs"  style="background-color: AliceBlue; height: 200px; width: 600px; overflow: auto;"  var="chatMsg" value="#{chatBean.chat.chatMessages}"  >
+               
+                <ice:panelGrid id="pgMsgChat" columns="3" >
+                <ice:outputLabel style="text-align:left "	value="#{chatMsg.time}">
+								<f:convertDateTime type="date" pattern="HH:mm:ss" timeZone="America/Bogota" />
+			    </ice:outputLabel>
+                <ice:outputLabel  id="optlbUser"  value="- #{chatMsg.sender.nickName}:" > </ice:outputLabel>
+                <ice:outputText id="optTextMessage" value="#{chatMsg.message}"/>                
+                </ice:panelGrid>
+                
+               
+               </ice:panelSeries>
+                                         
+                <ice:panelGrid id="pgSendMsg" columns="3" >
+                <ice:inputText maxlength="50" disabled="#{!chatBean.enableChatting}" actionListener="#{chatBean.sendMessage}"  id="iptMsgs" style="width:200px;" partialSubmit="true" value="#{chatBean.textMessage}"/>
+                <ice:commandButton disabled="#{!chatBean.enableChatting}"	actionListener="#{chatBean.sendMessage}" value="Enviar" />
+                 <ice:commandButton	disabled="#{!chatBean.enableChatting}" actionListener="#{chatBean.closeChat}" value="Cerrar Chat" >
+                 <f:param name="patient" value="#{chatBean.receiver.userSession}"/>
+                 </ice:commandButton>
+               </ice:panelGrid>
+               
+              </ice:panelGroup>
+                                   
+                                            
+              </ice:column>
+              
+              </ice:dataTable>
+              
+              
+              
+    
+              
+             </ice:form>
+         </div>	
+	</body>
+ </html>
+ 

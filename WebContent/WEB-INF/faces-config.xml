@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xi="http://www.w3.org/2001/XInclude"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+ <managed-bean>
+  <managed-bean-name>talkerChat</managed-bean-name>
+  <managed-bean-class>com.llanox.chat.presentation.ChatTalkerController</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>chatManager</property-name>
+   <value>#{chatManager}</value>
+  </managed-property>
+ </managed-bean>
+ 
+ 
+
+ 
+  <managed-bean>
+  <managed-bean-name>chatHistory</managed-bean-name>
+  <managed-bean-class>com.llanox.chat.presentation.ChatHistoryController</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>chatService</property-name>
+   <value>#{chatService}</value>
+  </managed-property>
+ </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>chatManager</managed-bean-name>
+  <managed-bean-class>com.llanox.chat.services.ChatManager</managed-bean-class>
+  <managed-bean-scope>application</managed-bean-scope>
+   
+  <managed-property>
+   <property-name>chatDAO</property-name>
+   <value>#{chatDAO}</value>
+  </managed-property>
+  
+  <managed-property>
+   <property-name>chatUserDAO</property-name>
+   <value>#{chatUserDAO}</value>
+  </managed-property>
+  
+    <managed-property>
+   <property-name>chatMessageDAO</property-name>
+   <value>#{chatMessageDAO}</value>
+  </managed-property>
+  
+ </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>chatService</managed-bean-name>
+  <managed-bean-class>com.llanox.chat.services.ChatService</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+   
+  <managed-property>
+   <property-name>chatDAO</property-name>
+   <value>#{chatDAO}</value>
+  </managed-property>
+  
+  </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>chatDAO</managed-bean-name>
+  <managed-bean-class>com.llanox.chat.persistence.dao.ChatDAO</managed-bean-class>
+  <managed-bean-scope>application</managed-bean-scope>
+ </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>chatUserDAO</managed-bean-name>
+  <managed-bean-class>com.llanox.chat.persistence.dao.ChatUserDAO</managed-bean-class>
+  <managed-bean-scope>application</managed-bean-scope>
+ </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>chatMessageDAO</managed-bean-name>
+  <managed-bean-class>com.llanox.chat.persistence.dao.ChatMessageDAO</managed-bean-class>
+  <managed-bean-scope>application</managed-bean-scope>
+ </managed-bean>
+
+
+
+
+<!--  -->
+
+
+
+
+
+
+
+ 
+ 
+ <application>
+  <view-handler>com.icesoft.faces.facelets.D2DFaceletViewHandler</view-handler>
+     <locale-config>
+            <default-locale>es</default-locale>
+            <supported-locale>es</supported-locale>
+     </locale-config>
+  
+ </application>
+</faces-config>
+
+

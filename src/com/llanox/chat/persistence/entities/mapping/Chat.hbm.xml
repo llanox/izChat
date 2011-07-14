@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 26, 2010 6:12:52 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class catalog="cmi_chat" name="com.cmi.chat.persistence.entities.Chat" table="chats">
+  <id name="id" type="long">
+   <column name="id"/>
+   <generator class="increment"/>
+  </id>
+  <property generated="never" lazy="false" name="startTime" type="timestamp">
+   <column length="19" name="start_time" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="endTime" type="timestamp">
+   <column length="19" name="end_time"/>
+  </property>
+  
+  <property generated="never" lazy="false" name="chatRoom" type="string">
+   <column length="100" name="chat_room" not-null="true"/>
+  </property>
+  
+  <list name="chatMessages" lazy="false" inverse="true" cascade="save-update" >
+    <key column="id"/>
+    <list-index column="chat_id"/>                                                                                           
+    <one-to-many class="com.cmi.chat.persistence.entities.ChatMessage" />
+  </list>
+  
+  
+ </class>
+</hibernate-mapping>

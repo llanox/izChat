@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cmi_chat</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">r00t</property>
+    <property name="hibernate.format_sql">false</property>
+    <property name="hibernate.use_sql_comments">false</property>
+    <property name="hibernate.show_sql">false</property>
+    <property name="hibernate.c3p0.min_size">5</property>
+    <property name="hibernate.c3p0.max_size">5</property>
+    <property name="hibernate.c3p0.timeout">1800</property>
+    <property name="hibernate.c3p0.max_statements">50</property>
+
+    
+    <mapping class="com.cmi.chat.persistence.entities.ChatUser"/>
+    <mapping class="com.cmi.chat.persistence.entities.Chat"/>
+    <mapping class="com.cmi.chat.persistence.entities.ChatMessage"/>
+    <mapping resource="com/cmi/chat/persistence/entities/mapping/Chat.hbm.xml"/>
+    <mapping resource="com/cmi/chat/persistence/entities/mapping/ChatMessage.hbm.xml"/>
+    <mapping resource="com/cmi/chat/persistence/entities/mapping/ChatUser.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
